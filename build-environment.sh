@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # To run this script delete all files but 
-# this.
+# this one and execute.
+# $ ./build-enviroment
 
 # Build a Docker/Ruby on Rails enviroment. 
 # This shell file follows the instructions  
@@ -9,12 +10,12 @@
 
 # Enviroment constants
 RUBY_VERSION=2.3                                      # Ruby version used at Dockerfile
-RAILS_APP_NAME=app			                              # Rails app name
+RAILS_APP_NAME=app                                    # Rails app name
 APP_ROUTE=./$RAILS_APP_NAME                           # app folder location
 SH_ROUTE=./sh                                         # sh folder location
 DOCKER_ROUTE=./                                       # Dockerfiles location
-DOCKER_RAILS_CONTAINER=${RAILS_APP_NAME}-RubyOnRails  # Docker container name for Ruby
-DOCKER_POSTGRE_CONTAINER=${RAILS_APP_NAME}-Postgre 		# Docker container name for Postgre
+DOCKER_RAILS_CONTAINER=RubyOnRails                    # Docker container name for Ruby
+DOCKER_POSTGRE_CONTAINER=Postgre 		                  # Docker container name for Postgre
 
 
 # Print exit messages with 
@@ -98,7 +99,8 @@ EOF
 
 successMsg "Created Dockerfile and docker-compose.yml at $DOCKER_ROUTE."
 
-
+# Restart Docker to prevent issues  Docker daemon connection
+sudo service docker restart
 # Create rails APP scaffolding
 sudo docker-compose run web rails new . --force --database=postgresql --skip-bundle $APP_ROUTE
 # Create scaffolding sh file
@@ -118,7 +120,7 @@ EOF
 sed -i "s/# gem 'therubyracer'/gem 'therubyracer'/g" $APP_ROUTE/Gemfile
 
 # Docker Build
-docker-compose build
+sudo docker-compose build
 successMsg "Docker enviroment built."
 
 # Set DB

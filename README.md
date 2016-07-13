@@ -26,14 +26,6 @@ Delete all files but `build-environment.sh`. Adjust constant to build your own f
 
 ```bash
 # 1. Adjust environment constants at build-environment.sh
-RUBY_VERSION=2.3                                      # Ruby version used at Dockerfile
-RAILS_APP_NAME=app                                    # Rails app name
-APP_ROUTE=./$RAILS_APP_NAME                           # app folder location
-SH_ROUTE=./sh                                         # sh folder location
-DOCKER_ROUTE=./                                       # Dockerfiles location
-DOCKER_RAILS_CONTAINER=${RAILS_APP_NAME}-RubyOnRails  # Docker container name for Ruby
-DOCKER_POSTGRE_CONTAINER=${RAILS_APP_NAME}-Postgre    # Docker container name for Postgre
-
 # 2. Execute build to create Docker, Gem, config
 # and bash files.
 ./build-environment.sh
