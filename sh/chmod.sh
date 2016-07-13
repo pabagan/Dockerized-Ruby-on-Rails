@@ -1,1 +1,1 @@
-sudo chown -R $USER:$USER ./../app
+sudo chown -R $USER:$USER ./app

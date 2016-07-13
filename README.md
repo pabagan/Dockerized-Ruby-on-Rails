@@ -18,26 +18,28 @@ git clone https://github.com/pabagan/env-Ruby-on-Rails.git
 docker-compose build
 
 # or start and access Ruby on Rails container by executing
-./sh/start.sh
+./sh/run.sh
 ```
 
 ## Build flavour 2
-Delete all files but sh/build-environment.sh. Adjust constant to build your own flavour.
+Delete all files but `build-environment.sh`. Adjust constant to build your own flavour.
 
 ```bash
 # 1. Adjust environment constants at build-environment.sh
-RAILS_APP_NAME=app                                        # Rails app name
-APP_ROUTE=./../$RAILS_APP_NAME                            # app folder location
-DOCKER_ROUTE=./..                                         # Dockerfiles location
-DOCKER_RAILS_CONTAINER=${RAILS_APP_NAME}-RubyOnRails      # Docker container name for Ruby
-DOCKER_POSTGRE_CONTAINER=${RAILS_APP_NAME}-Postgre        # Docker container name for Postgre
+RUBY_VERSION=2.3                                      # Ruby version used at Dockerfile
+RAILS_APP_NAME=app                                    # Rails app name
+APP_ROUTE=./$RAILS_APP_NAME                           # app folder location
+SH_ROUTE=./sh                                         # sh folder location
+DOCKER_ROUTE=./                                       # Dockerfiles location
+DOCKER_RAILS_CONTAINER=${RAILS_APP_NAME}-RubyOnRails  # Docker container name for Ruby
+DOCKER_POSTGRE_CONTAINER=${RAILS_APP_NAME}-Postgre    # Docker container name for Postgre
 
 # 2. Execute build to create Docker, Gem, config
 # and bash files.
-./sh/build-environment.sh
+./build-environment.sh
 
 # or start and access Ruby on Rails container by executing
-./sh/start.sh
+./sh/run.sh
 ```
 
 ## Start APP
@@ -48,6 +50,6 @@ docker-compose up
 # -d run container in the background
 docker-compose up -d  
 # or start and access Ruby on Rails container shell
-./sh/start.sh
+./sh/run.sh
 ```
 Now should see Ruby on Rails wellcome page at [localhost:3000](http://localhost:3000)
